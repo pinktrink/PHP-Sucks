@@ -1,21 +1,13 @@
 <?php
 require 'config.php';
-require 'Phyre/core/phyre.php';
-
-$traits = [
-	'CountableIterator',
-	'ArrayEmulation'
-];
-
-foreach($traits as $trait){
-	require "traits/$trait.php";
-}
 
 $interfaces = [
 	'Printable',
 	'AsHTML',
 	'DBReflection',
-	'CollectionInterface'
+	'CollectionInterface',
+	'SwitchablePrimary',
+	'SingletonInterface'
 ];
 
 foreach($interfaces as $interface){
@@ -25,8 +17,8 @@ foreach($interfaces as $interface){
 $classes = [
 	'Collection',
 	'DBReflectiveCollection',
-	'WorkCollection',
-	'SchoolCollection'
+	'SwitchablePrimaryCollection',
+	'PDOPlus'
 ];
 
 foreach($classes as $class){
