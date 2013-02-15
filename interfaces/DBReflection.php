@@ -1,4 +1,4 @@
 <?php
 interface DBReflection{
-	public function getData(array $data = []);
+	public function retrieve(array $data = []);
 }

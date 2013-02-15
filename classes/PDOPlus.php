@@ -1,12 +1,8 @@
 <?php
 class PDOPlus extends SwitchablePrimaryCollection implements SingletonInterface{
-	private static $instance;
+	use Singleton;
 	
-	public static function instance(){
-		if(!self::$instance){
-			$this->instance = new self;
-		}
+	public function PDO(){
 		
-		return $this->instance;
 	}
 }

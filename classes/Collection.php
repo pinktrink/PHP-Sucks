@@ -1,8 +1,8 @@
 <?php
-abstract class Collection implements ArrayAccess, Iterator, Countable, CollectionInterface{
+class Collection implements ArrayAccess, Iterator, Countable, CollectionInterface, Serializable, JsonSerializable{
 	private $contents = [];
 	
-	public function __constructor(array $contents){
+	public function __construct(array $contents = NULL){
 		$this->contents = $contents;
 	}
 	
@@ -13,7 +13,7 @@ abstract class Collection implements ArrayAccess, Iterator, Countable, Collectio
 			$newCb = $cb->bindTo($piece);
 			
 			if($newCb()){
-				$retData[] = $retData;
+				$retData[] = $piece;
 			}
 		}
 		
@@ -22,6 +22,14 @@ abstract class Collection implements ArrayAccess, Iterator, Countable, Collectio
 	
 	public function sort(Closure $cb){
 		usort($this->contents, $cb);
+	}
+	
+	public function all(){
+		return new CollectionIterativeProxy($this);
+	}
+	
+	public function toArray(){
+		return $this->contents;
 	}
 	
 	//ArrayAccess
@@ -34,7 +42,11 @@ abstract class Collection implements ArrayAccess, Iterator, Countable, Collectio
 	}
 	
 	public function offsetSet($offset, $value){
-		$this->contents = $value;
+		if($offset === null){
+			$this->contents[] = $value;
+		}else{
+			$this->contents[$offset] = $value;
+		}
 	}
 	
 	public function offsetUnset($offset){
@@ -65,5 +77,19 @@ abstract class Collection implements ArrayAccess, Iterator, Countable, Collectio
 	//Countable
 	public function count(){
 		return count($this->contents);
+	}
+	
+	//Serializable
+	public function serialize(){
+		return serialize($this->contents);
+	}
+	
+	public function unserialize($data){
+		return $this->contents = unserialize($data);
+	}
+	
+	//JsonSerializable
+	public function jsonSerialize(){
+		return $this->contents;
 	}
 }

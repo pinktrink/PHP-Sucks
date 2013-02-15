@@ -3,6 +3,15 @@ class SwitchablePrimaryCollection extends Collection implements SwitchablePrimar
 	private $current;
 	private $currentKey;
 	
+	public function __construct(array $contents){
+		parent::__construct($contents);
+		
+		$this->rewind();
+		
+		$this->current = $this->current();
+		$this->currentKey = $this->key();
+	}
+	
 	public function change($index){
 		if(isset($this[$index])){
 			$this->current = $this[$index];
@@ -10,9 +19,13 @@ class SwitchablePrimaryCollection extends Collection implements SwitchablePrimar
 	}
 	
 	public function __get($name){
-		if(isset($this->current->$name)){
+		if(property_exists($this->current, $name)){
 			return $this->current->$name;
 		}
+	}
+	
+	public function __set($name, $val){
+		return $this->current->$name = $val;
 	}
 	
 	public function __call($name, $args){

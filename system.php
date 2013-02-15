@@ -1,6 +1,15 @@
 <?php
 require 'config.php';
 
+$modules = [
+	'ErrorToException',
+	'Deterministic'
+];
+
+foreach($modules as $module){
+	require "modules/$module.php";
+}
+
 $interfaces = [
 	'Printable',
 	'AsHTML',
@@ -14,7 +23,16 @@ foreach($interfaces as $interface){
 	require "interfaces/$interface.php";
 }
 
+$traits = [
+	'Singleton'
+];
+
+foreach($traits as $trait){
+	require "traits/$trait.php";
+}
+
 $classes = [
+	'CollectionIterativeProxy',
 	'Collection',
 	'DBReflectiveCollection',
 	'SwitchablePrimaryCollection',
