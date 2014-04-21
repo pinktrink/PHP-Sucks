@@ -35,8 +35,7 @@ $classes = [
 	'CollectionIterativeProxy',
 	'Collection',
 	'DBReflectiveCollection',
-	'SwitchablePrimaryCollection',
-	'PDOPlus'
+	'SwitchablePrimaryCollection'
 ];
 
 foreach($classes as $class){
