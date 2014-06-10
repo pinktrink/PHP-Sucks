@@ -1,4 +1,4 @@
 <?php
 interface Printable{
-	public function __toString();
+    public function __toString();
 }

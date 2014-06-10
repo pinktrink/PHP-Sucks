@@ -2,42 +2,42 @@
 require 'config.php';
 
 $modules = [
-	'ErrorToException',
-	'Deterministic'
+    'ErrorToException',
+    'Deterministic'
 ];
 
 foreach($modules as $module){
-	require "modules/$module.php";
+    require "modules/$module.php";
 }
 
 $interfaces = [
-	'Printable',
-	'AsHTML',
-	'DBReflection',
-	'CollectionInterface',
-	'SwitchablePrimary',
-	'SingletonInterface'
+    'Printable',
+    'AsHTML',
+    'DBReflection',
+    'CollectionInterface',
+    'SwitchablePrimary',
+    'SingletonInterface'
 ];
 
 foreach($interfaces as $interface){
-	require "interfaces/$interface.php";
+    require "interfaces/$interface.php";
 }
 
 $traits = [
-	'Singleton'
+    'Singleton'
 ];
 
 foreach($traits as $trait){
-	require "traits/$trait.php";
+    require "traits/$trait.php";
 }
 
 $classes = [
-	'CollectionIterativeProxy',
-	'Collection',
-	'DBReflectiveCollection',
-	'SwitchablePrimaryCollection'
+    'CollectionIterativeProxy',
+    'Collection',
+    'DBReflectiveCollection',
+    'SwitchablePrimaryCollection'
 ];
 
 foreach($classes as $class){
-	require "classes/$class.php";
+    require "classes/$class.php";
 }
